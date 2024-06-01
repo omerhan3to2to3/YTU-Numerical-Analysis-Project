@@ -31,7 +31,6 @@ void numericalDifferantial();
 void simpson();
 void trapez();
 void gregoryNewton();
-void makeStringANiceInt();
 void inverseMatrix();
 
 typedef enum { NUMBER, VARIABLE, operat, FUNCTION, PARENTHESIS } TokenType;
@@ -363,13 +362,13 @@ void regula(double a, double b, Token *postfix, int size, double tol, int maxIte
     double fb = f(b, postfix, size);
 
     if (fa * fb >= 0) {
-        printf("Baslangıc aralıgında kok yok.\n");
+        printf("BaslangÃ½c aralÃ½gÃ½nda kok yok.\n");
         return;
     }
 
     double c, fc;
     for (int iter = 0; iter < maxIter; iter++) {
-        c = (a * fb - b * fa) / (fb - fa); // Regula Falsi formülü
+        c = (a * fb - b * fa) / (fb - fa); // Regula Falsi formÃ¼lÃ¼
         fc = f(c, postfix, size);
 
         if (fabs(fc) < tol) {
@@ -386,7 +385,7 @@ void regula(double a, double b, Token *postfix, int size, double tol, int maxIte
         }
     }
 
-    printf("Maksimum iterasyona ulasıldı. Bulunan en iyi tahmin: %lf\n", c);
+    printf("Maksimum iterasyona ulasÃ½ldÃ½. Bulunan en iyi tahmin: %lf\n", c);
 }void regulaFalsi(){
     char expr[MAXEXPR];
     Token postfix[MAXEXPR];
@@ -394,7 +393,7 @@ void regula(double a, double b, Token *postfix, int size, double tol, int maxIte
 
     printf("Fonksiyonu girin : ");
     fgets(expr, MAXEXPR, stdin);
-    expr[strcspn(expr, "\n")] = 0; // fgets kullanınca gelen \n karakterini silmek için
+    expr[strcspn(expr, "\n")] = 0; // fgets kullanÃ½nca gelen \n karakterini silmek iÃ§in
 
     shunting(expr, postfix, &postfixSize, 0);
 
@@ -423,7 +422,7 @@ void newton(double initialGuess, Token *postfix, int size, Token *postfixDeriv, 
         f0_deriv = f(x0, postfixDeriv, sizeDeriv);
 
         if (fabs(f0_deriv) < 1e-12) {
-            printf("Turev çok kucuk, Newton-Raphson yontemi durduruldu.\n");
+            printf("Turev Ã§ok kucuk, Newton-Raphson yontemi durduruldu.\n");
             return;
         }
 
@@ -449,11 +448,11 @@ void newton(double initialGuess, Token *postfix, int size, Token *postfixDeriv, 
 
     printf("Fonksiyonu giriniz: ");
     fgets(expr, MAXEXPR, stdin);
-    expr[strcspn(expr, "\n")] = 0; // fgets kullaninca gelen \n karakterini silmek için
+    expr[strcspn(expr, "\n")] = 0; // fgets kullaninca gelen \n karakterini silmek iÃ§in
 
     printf("Fonksiyonun turevini giriniz: ");
     fgets(exprDeriv, MAXEXPR, stdin);
-    exprDeriv[strcspn(exprDeriv, "\n")] = 0; // fgets kullaninca gelen \n karakterini silmek için
+    exprDeriv[strcspn(exprDeriv, "\n")] = 0; // fgets kullaninca gelen \n karakterini silmek iÃ§in
 
     shunting(expr, postfix, &postfixSize, 0);
     shunting(exprDeriv, postfixDeriv, &postfixSizeDeriv, 0);
@@ -662,7 +661,7 @@ void gaussSeidel(){
 
     gauss(A, b, x, n);
 
-    printf("Denklemlerin sonuclarını giriniz x:\n");
+    printf("Denklemlerin sonuclarÃ½nÃ½ giriniz x:\n");
     for (int i = 0; i < n; i++) {
         printf("%lf\n", x[i]);
     }
@@ -709,9 +708,9 @@ void gaussSeidel(){
     }
 
     if (iterations == MAX_ITERATIONS) {
-        printf("Maximum iterasyona ulaşıldı.\n");
+        printf("Maximum iterasyona ulaÃ¾Ã½ldÃ½.\n");
     } else {
-        printf("iterasyonlarla %d ulasıldı.\n", iterations);
+        printf("iterasyonlarla %d ulasÃ½ldÃ½.\n", iterations);
     }
 }
 double forwardDifference(double x, double h, Token *postfix, int size) {
@@ -730,7 +729,7 @@ void numericalDifferantial(){
     double x, h;
     int method;
 
-    printf("Fonksiyon ifadesini girin (örnek: 3*x^2 + 2*x + 1): ");
+    printf("Fonksiyon ifadesini girin (Ã¶rnek: 3*x^2 + 2*x + 1): ");
     fgets(expr, MAXEXPR, stdin);
     expr[strcspn(expr, "\n")] = '\0'; 
 
@@ -741,7 +740,7 @@ void numericalDifferantial(){
     printf("Turev alinacak noktayi girin (x): ");
     scanf("%lf", &x);
 
-    printf("Adım buyuklugunu girin (h): ");
+    printf("AdÃ½m buyuklugunu girin (h): ");
     scanf("%lf", &h);
 
     printf("Yontemi secin (1 - Ileri Fark, 2 - Geri Fark, 3 - Merkez Fark): ");
@@ -786,14 +785,14 @@ double trapezon(double a, double b, int n, Token *postfix, int size) {
 
     printf("Fonksiyonu giriniz: ");
     fgets(expr, MAXEXPR, stdin);
-    expr[strcspn(expr, "\n")] = 0; // fgets kullanınca gelen \n karakterini silmek için
+    expr[strcspn(expr, "\n")] = 0; // fgets kullanÃ½nca gelen \n karakterini silmek iÃ§in
 
     shunting(expr, postfix, &postfixSize, 0);
 
     double a, b;
     int n;
 
-    printf("Baslangıc araligi giriniz:(a): ");
+    printf("BaslangÃ½c araligi giriniz:(a): ");
     scanf("%lf", &a);
 
     printf("Bitis araligini giriniz (b): ");
@@ -803,7 +802,7 @@ double trapezon(double a, double b, int n, Token *postfix, int size) {
     scanf("%d", &n);
 
     double result = trapezon(a, b, n, postfix, postfixSize);
-    printf("Sonuç: %lf\n", result);
+    printf("SonuÃ§: %lf\n", result);
 }
 
 void gregoryNewton(){
